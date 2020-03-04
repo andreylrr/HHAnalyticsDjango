@@ -9,16 +9,9 @@ class Command(BaseCommand):
     help = 'Load data from csv files into SQLite DB'
 
     def add_arguments(self, parser):
-        pass
-        # DBПуть к файлам с данными
+        # Путь к файлам с данными
         parser.add_argument('path_to_files', nargs='+', type=str)
 
-        # Аргумент для создания БД с нуля
-        parser.add_argument('--create',
-                            action='store_true',
-                            dest='create',
-                            default=False,
-                            help='Создать БД')
 
     def handle(self, *args, **options):
 
@@ -37,20 +30,13 @@ class Command(BaseCommand):
                 self.stdout.write(f"Один из файлов {files} не сущеуствует в каталоге {options['path_to_files']}")
                 return
 
-            # Проверить наличие параметра --create. Если присутствует, то очистить БД
             vacancy = Vacancies()
             region = Regions()
             skill = Skills()
             prof_are = Prof_Area()
             prof_spec = Prof_Specs()
-            if options.get('create'):
-                prof_are.delete()
-                prof_spec.delete()
-                region.delete()
-                skill.delete()
-                vacancy.delete()
 
-            # Прочитать файл и загрузить в БД
+            # Прочитать файл и загрузить таблицу ключевых навыков
             with open(paths[0] + "/" + "main_skills.csv") as f:
                 reader = csv.reader(f)
                 for row in reader:
@@ -59,6 +45,7 @@ class Command(BaseCommand):
                    skill.save()
             self.stdout.write(f"Таблица Ключевых навыков hhstats_skills загружена." )
 
+            # Прочитать файл и загрузить таблицу регионов
             with open(paths[0] + "/" + "main_regions.csv") as f:
                 reader = csv.reader(f)
                 for row in reader:
@@ -70,6 +57,7 @@ class Command(BaseCommand):
                     region.save()
             self.stdout.write(f"Таблица Регионов hhstats_regions загружена." )
 
+            # Прочитать файл и загрузить таблицу индустрий
             with open(paths[0] + "/" + "main_prof_specs.csv") as f:
                 reader = csv.reader(f, delimiter=";")
                 for row in reader:
@@ -78,6 +66,7 @@ class Command(BaseCommand):
                     prof_spec.save()
             self.stdout.write(f"Таблица Индустрий hhstats_prof_specs загружена." )
 
+            # Прочитать файл и загрузить таблицу профессиональной области
             with open(paths[0] + "/" + "main_prof_area.csv") as f:
                 reader = csv.reader(f, delimiter=";")
                 for row in reader:
@@ -86,6 +75,7 @@ class Command(BaseCommand):
                     prof_are.save()
             self.stdout.write(f"Таблица Профессиональной области hhstats_prof_area загружена." )
 
+            # Прочитать и загрузить таблицу вакансий
             with open(paths[0] + "/" + "main_vacancies.csv") as f:
                 reader = csv.reader(f)
                 for row in reader:
@@ -103,6 +93,7 @@ class Command(BaseCommand):
                     vacancy.save()
             self.stdout.write(f"Таблица Вакансий hhstats_vacancies загружена." )
 
+            # Прочитать и загрузить вспомогательную таблицу для связи вакансии с ключевыми навыками
             with open(paths[0] + "/" + "main_skills_vacancies.csv") as f:
                 reader = csv.reader(f)
                 for row in reader:
@@ -112,6 +103,7 @@ class Command(BaseCommand):
                     connection.commit()
             self.stdout.write(f"Вспомогательная таблица hhstats_vacancies_skills загружена." )
 
+            # Прочитать и загрузить вспомогательную таблицу для связи вакансии и профессианальной области
             with open(paths[0] + "/" + "main_prof_area_vacancies.csv") as f:
                 reader = csv.reader(f)
                 for row in reader:
@@ -121,6 +113,7 @@ class Command(BaseCommand):
                     connection.commit()
             self.stdout.write(f"Вспомогательная таблица hhstats_vacancies_prof_area загружена." )
 
+            # Прочитать и загрузить вспомогательную таблицу для связи вакансии и специализации
             with open(paths[0] + "/" + "main_prof_specs_vacancies.csv") as f:
                 reader = csv.reader(f)
                 for row in reader:
@@ -131,11 +124,7 @@ class Command(BaseCommand):
             self.stdout.write(f"Вспомогательная таблица hhstats_vacancies_prof_specs загружена." )
 
 
-            #
-            # with open(options["path_to_files"] + "/" + "main_vacancies.csv") as f:
-            #     reader = csv.reader(f)
-            #     for row in reader:
-            #         self.stdout.write(f"{row[0]} {row[1]} {row[2]} {row[3]} )
+            self.stdout.write(f"База Данных восстановлена из файлов полностью.")
 
 
 
