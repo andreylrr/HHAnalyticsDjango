@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+  HH Analytics
+{% endblock %}
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            {% block topbar %}
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+               <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <a class="nav-link" href="{% url 'hhmain:login' %}">
+                    <i class="fas fa-fw"></i>
+                    <span>Войти</span></a>
+                </ul>
+            </nav>
+            <!-- End of Topbar -->
+            {% endblock %}
+
+        </div>
+
+        {% block maincontent %}
+        <!-- Begin Page Content -->
+        <div class="container-fluid min-vh-100" >
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-900">Результаты запроса</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                          <h class="h5 text-gray-900">Топ 10 навыков взятых из описания вакансии</h>
+                          <br>
+                          <h class="h5 text-gray-900">Топ 10 умений взятых из ключевых навыков</h>
+                          <br><br>
+                          <h class="h5 text-gray-900">Средние значения зарплат</h>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+        {% endblock %}
+   </div>
+</div>
+<!-- End of Main Content -->
+
