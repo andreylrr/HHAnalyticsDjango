@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  HH Analytics
+{% endblock %}
+
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        {% block topbar %}
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-link" href="{% url 'hhmain:login' %}">
+                    <i class="fas fa-fw"></i>
+                    <span>Войти</span></a>
+            </ul>
+        </nav>
+        <!-- End of Topbar -->
+        {% endblock %}
+
+        {% block maincontent %}
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div class="card-body p-5">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-6 offset-0 col-1">
+                        <div class="p-2">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Статистика по регионам</h1>
+                            </div>
+                            <form class="user" method="POST">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user"
+                                               id="Region" name="Region" placeholder="Регион" required>
+                                    </div>
+                                </div>
+                                <button type="submit" placeholder="Передать запрос на вервер" class="btn btn-primary btn-user btn-block">
+                                    Передать запрос на обработку
+                                </button>
+                            </form>
+                            {% for message in messages %}
+                            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ message | safe }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="figure-img offset-2 col-1">
+                        <a href="{% url 'hhmain:index' %}">
+                            <img src="/static/img/Nauchus2.jpg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Main Content -->
+        {% endblock %}
+    </div>
+</div>

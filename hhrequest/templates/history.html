@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+  HH Analytics
+{% endblock %}
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            {% block topbar %}
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <a class="nav-link" href="{% url 'hhmain:login' %}">
+                    <i class="fas fa-fw"></i>
+                    <span>Войти</span></a>
+                </ul>
+            </nav>
+            <!-- End of Topbar -->
+            {% endblock %}
+        </div>
+
+        {% block maincontent %}
+        <!-- Begin Page Content -->
+        <div class="container-fluid min-vh-100" >
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">История запросов</h1>
+            <p class="mb-4"><a>В этой таблице представлена история Ваших запросов. Для просмотра результатов запроса нажмите "Смотреть".</a>.</p>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-2 h4 font-weight-bold text-primary offset-1 flex-row">Таблица запросов</h6>
+                    <form action="{% url 'hhrequest:history' %}" >
+                        <button placeholder="Обновить" class="btn-user btn-circle btn-light offset-11 flex-row">Обновить</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+        {% endblock %}
+   </div>
+</div>
+<!-- End of Main Content -->
+
+
