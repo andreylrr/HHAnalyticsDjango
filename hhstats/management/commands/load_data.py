@@ -3,7 +3,6 @@ from hhstats.models import Vacancies, Skills, Regions, Prof_Area, Prof_Specs
 import os
 import csv
 from django.db import connection
-import datetime
 
 class Command(BaseCommand):
     help = 'Load data from csv files into SQLite DB'
@@ -17,7 +16,7 @@ class Command(BaseCommand):
 
             files = ["main_prof_area_vacancies.csv", "main_prof_specs_vacancies.csv",
                      "main_regions.csv", "main_skills.csv", "main_vacancies.csv",
-                     "main_prof_specs_vacancies.csv", "main_prof_area_vacancies.csv"]
+                     "main_prof_area.csv", "main_prof_specs.csv","main_skills_vacancies.csv"]
             # Проверить есть ли требуемые файлы в указанном каталоге
             file_exists: bool = True
             paths = options["path_to_files"]

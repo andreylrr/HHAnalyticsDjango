@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import ContactsForm
+from .models import Contacts
+from django.views.generic.edit import CreateView
+from django.contrib.messages.views import SuccessMessageMixin
 import datetime
 
 
@@ -10,24 +13,22 @@ def main_page(request):
 def login(request):
     return render(request, 'login.html')
 
-def contacts(request):
-
-    if request.method == "POST":
-        form = ContactsForm(request.POST)
-        if form.is_valid():
-            contact = form.save(commit=False)
-            contact.created = datetime.datetime.now()
-            contact.save()
-            return redirect('hhmain:index')
-    else:
-        form = ContactsForm()
-
-    data = dict()
-#    messages.success(request, "Success: This is the sample success Flash message.")
-    return render(request, 'contacts.html', {'form': form, 'data': data})
-
 def forgot_password(request):
     return render(request, 'forgot-password.html')
 
 def register(request):
     return render(request, 'register.html')
+
+class ContactsCreate(SuccessMessageMixin, CreateView):
+    form_class = ContactsForm
+    model = Contacts
+    template_name = 'contacts.html'
+    success_message = f'Ваше обращение сохранено и направлено на обработку.'
+
+    def form_valid(self, form):
+        return super(ContactsCreate, self).form_valid(form)
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+        )

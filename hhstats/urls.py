@@ -5,5 +5,5 @@ from . import views
 app_name = 'hhstats'
 
 urlpatterns = [
-    path('request', views.stats_request, name='stats-request' ),
+    path('request', views.StatsRequestCreate.as_view(), name='stats-request' ),
 ]
