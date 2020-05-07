@@ -6,7 +6,7 @@ class Request(Base):
     __tablename__ = "hhrequest_requests"
 
     id = Column(Integer, primary_key=True)
-#    user_id = Column(Integer, ForeignKey("users.id"))
+    user_id = Column(Integer)
     region = Column(String(150))
     text_request = Column(String(150))
     file_name = Column(String(250))
@@ -18,7 +18,7 @@ class Request(Base):
 
     def __init__(self, user_id=None, region=None, text_request=None, file_name=None, status=None,
                  created=None, updated=None, vacancy_number=None):
-#        self.user_id = user_id
+        self.user_id = user_id
         self.region = region
         self.text_request = text_request
         self.file_name = file_name

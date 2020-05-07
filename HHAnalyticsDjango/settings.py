@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hhstats',
     'hhmain',
     'hhrequest',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -66,13 +67,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'HHAnalyticsDjango.wsgi.application'
-
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -121,9 +123,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
 

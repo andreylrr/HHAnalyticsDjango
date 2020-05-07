@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 import datetime
 
-
+# Все view использующие пользователя будут имплементированы в следующей версии
 def main_page(request):
     return render(request, 'index.html')
 
@@ -19,6 +19,7 @@ def forgot_password(request):
 def register(request):
     return render(request, 'register.html')
 
+# View для создания обращения пользователя
 class ContactsCreate(SuccessMessageMixin, CreateView):
     form_class = ContactsForm
     model = Contacts
