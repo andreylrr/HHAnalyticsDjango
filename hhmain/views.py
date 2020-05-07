@@ -38,3 +38,6 @@ class UserRegister(CreateView):
     form_class=HHUserCreationForm
     success_url = reverse_lazy('login')
     template_name = "register.html"
+
+    def form_valid(self, form):
+        return super(UserRegister, self).form_valid(form)
