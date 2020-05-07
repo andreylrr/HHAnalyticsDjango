@@ -10,5 +10,5 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('contacts/', views.ContactsCreate.as_view(), name='contacts'),
     path('forgot-password/', views.forgot_password, name='forgot-password'),
-    path('register/', views.register, name='register'),
+    path('register/', views.UserRegister.as_view(), name='register'),
 ]

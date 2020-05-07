@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
-from .forms import ContactsForm
+from .forms import ContactsForm, HHUserCreationForm
 from .models import Contacts
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 import datetime
@@ -33,3 +33,8 @@ class ContactsCreate(SuccessMessageMixin, CreateView):
         return self.success_message % dict(
             cleaned_data,
         )
+
+class UserRegister(CreateView):
+    form_class=HHUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = "register.html"
