@@ -87,8 +87,25 @@
         <!-- Main Content -->
         <div id="content">
             <!-- Topbar -->
-            {% block topbar %}{% endblock %}
-            <!-- End of Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Navbar -->
+                {% if user.is_authenticated %}
+                    <li class="navbar-nav ml-auto">
+                        <a class="nav-link" href="{% url 'hhmain:logout' %}">Выход</a>
+                    </li>
+                {% else %}
+                    <li class="navbar-nav ml-auto">
+                        <a class="nav-link" href="{% url 'hhmain:login' %}">Вход</a>
+                    </li>
+                {% endif %}
+            </nav>
+                <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             {% block maincontent %}{% endblock %}

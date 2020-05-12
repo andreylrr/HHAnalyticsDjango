@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
 
 # Класс для добавления времени, когда происходили изменения в записи таблицы
 class TimeRegister(models.Model):
@@ -29,3 +30,9 @@ class Contacts(TimeRegister):
 
     def get_absolute_url(self):
         return reverse('hhmain:contacts')
+
+# # Модель для работы с пользователем
+# class HHUser(AbstractUser):
+#     email = models.EmailField(unique=True)
+#     # groups = models.TextField()
+#     # user_permissions = models.TextField()

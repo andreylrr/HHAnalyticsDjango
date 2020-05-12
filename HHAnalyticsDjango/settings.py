@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Путь, по которому будут отправлены все авторизованные пользователи
+LOGIN_REDIRECT_URL = "/"
+
+# Путь, по которому будут отправлены все пользователи, вышедшие из системы
+#LOGOUT_REDIRECT_URL = ""
 
 # Application definition
 

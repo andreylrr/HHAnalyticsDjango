@@ -11,9 +11,7 @@
     {% block maincontent %}
     <!-- Outer Row -->
     <div class="row justify-content-center">
-
       <div class="col-xl-10 col-lg-12 col-md-9">
-
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
@@ -29,18 +27,9 @@
                     <h1 class="h4 text-gray-900 mb-4">Добро пожаловать!</h1>
                   </div>
                   <form class="user" method="post">
-                    <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="InputEmail" name="Email" aria-describedby="emailHelp" placeholder="Введите адрес электронной почты..." required>
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="InputPassword" name="Password" placeholder="Пароль" required="">
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Запомнить меня</label>
-                      </div>
-                    </div>
+                      {% csrf_token %}
+                      <p>{{ form.username }}</p>
+                      <p>{{ form.password }}</p>
                     <button type="submit" placeholder="Войти" class="btn btn-primary btn-user btn-block">
                       Войти
                     </button>
@@ -54,9 +43,6 @@
                   </div>
                   {% endfor %}
                   <br>
-                  <div class="text-center">
-                    <a class="small" href="{% url 'hhmain:forgot-password' %}">Забыли пароль?</a>
-                  </div>
                   <div class="text-center">
                     <a class="small" href="{% url 'hhmain:register' %}">Создать учетную запись!</a>
                   </div>

@@ -1,8 +1,7 @@
 from django import forms
 from .models import Contacts
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-
 
 class ContactsForm(forms.ModelForm):
     class Meta:
@@ -28,15 +27,27 @@ class HHUserCreationForm(UserCreationForm):
         self.fields['email'].widget.attrs['class'] = 'form-control form-control-user'
         self.fields['email'].widget.attrs['placeholder'] = 'Введите адрес электронной почты'
 
-    email = forms.EmailField(required=True)
 
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2")
 
     def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
+        user = super(HHUserCreationForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()
         return user
+
+class HHLoginForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(HHLoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['class'] = 'form-control form-control-user'
+        self.fields['username'].widget.attrs['placeholder'] = "Введите имя пользователя"
+        self.fields['password'].widget.attrs['class'] = 'form-control form-control-user'
+        self.fields['password'].widget.attrs['placeholder'] = "Введите пароль"
+
+    class Meta:
+        model = User
+        fields = ("username", "password")

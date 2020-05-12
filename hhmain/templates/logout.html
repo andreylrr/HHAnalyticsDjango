@@ -28,6 +28,7 @@
                     <h1 class="h4 text-gray-900 mb-4">Возвращайтесь!</h1>
                   </div>
                   <form class="user" method="post">
+                      {% csrf_token %}
                     <div class="form-group">
                     <button type="submit" placeholder="Закончить работу" class="btn btn-primary btn-user btn-block">
                       Закончить работу

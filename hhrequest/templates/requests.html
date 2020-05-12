@@ -6,29 +6,7 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            {% block topbar %}
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <a class="nav-link" href="{% url 'hhmain:login' %}">
-                    <i class="fas fa-fw"></i>
-                    <span>Войти</span></a>
-                </ul>
-            </nav>
-            <!-- End of Topbar -->
-            {% endblock %}
-
+       <!-- Main Content -->
             {% block maincontent %}
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -72,5 +50,4 @@
             </div>
             <!-- End of Main Content -->
             {% endblock %}
-        </div>
     </div>

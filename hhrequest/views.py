@@ -6,11 +6,14 @@ from django.views.generic.edit import CreateView
 from django.views.generic import DetailView
 from django.contrib.messages.views import SuccessMessageMixin
 from django_tables2 import SingleTableView, RequestConfig
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .table import RequestTable
+from django.urls import reverse_lazy
 import json
 
 # View для создания запроса и отображения сообщения
-class RequestCreate(SuccessMessageMixin, CreateView):
+class RequestCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy("hhmain:login")
     form_class = RequestsForm
     model = Requests
     template_name = 'requests.html'
@@ -22,11 +25,11 @@ class RequestCreate(SuccessMessageMixin, CreateView):
         :param form: возвращенная форма запроса
         :return: страницу с формой после обработки запроса
         """
-        form.instance.user_id = 1
+        form.instance.user_id = self.request.user.id
         form.instance.status = 0
         form.instance.vacancy_number = -1
         form.instance.type = 1
-        return super(RequestCreate,self).form_valid(form)
+        return super(RequestCreate, self).form_valid(form)
 
     def get_success_message(self, cleaned_data):
         """
@@ -37,18 +40,27 @@ class RequestCreate(SuccessMessageMixin, CreateView):
         return self.success_message % dict(
             cleaned_data,
         )
+
+
 # Класс для отображения таблицы с историей запросово
-class RequestsListView(SingleTableView):
+class RequestsListView(LoginRequiredMixin, SingleTableView):
+    login_url = reverse_lazy("hhmain:login")
     table_class = RequestTable
     model = Requests
     table_pagination = False
     template_name = "history.html"
 
+    def get_queryset(self):
+        return Requests.objects.filter(user_id=self.request.user.id).all()
+
+
 # Класс для отображения детальной информации о запросе
-class RequestDetailView(DetailView):
+class RequestDetailView(LoginRequiredMixin, DetailView):
     template_name = "request-view.html"
     model = Requests
     pk_url_kwarg = "pk"
+    login_url = reverse_lazy("hhmain:login")
+
 
     def get_context_data(self, **kwargs):
         """
