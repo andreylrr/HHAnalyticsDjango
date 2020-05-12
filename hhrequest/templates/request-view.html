@@ -41,10 +41,19 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                           <h class="h5 text-gray-900">Топ 10 навыков взятых из описания вакансии</h>
+                            {% for item in sum_descriptions %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
                           <br>
                           <h class="h5 text-gray-900">Топ 10 умений взятых из ключевых навыков</h>
+                            {% for item in sum_keyskills %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
                           <br><br>
                           <h class="h5 text-gray-900">Средние значения зарплат</h>
+                            {% for item in sum_salaries %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
                         </table>
                     </div>
                 </div>

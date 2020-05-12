@@ -5,6 +5,7 @@ from . import views
 app_name = 'hhrequest'
 
 urlpatterns = [
-    path('request', views.hhrequest, name='request' ),
-    path('history', views.history, name='history'),
+    path('request', views.RequestCreate.as_view(), name='request' ),
+    path('history', views.RequestsListView.as_view(), name='history'),
+    path('detail_request/<int:pk>/', views.RequestDetailView.as_view(), name='detail_request'),
 ]

@@ -41,15 +41,12 @@
                                     <h1 class="h4 text-gray-900 mb-4">Создать запрос</h1>
                                 </div>
                                 <form class="user" method="POST">
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                                   id="Region" name="Region" placeholder="Регион" required>
-                                        </div>
+                                    {% csrf_token %}
+                                    <div class="form-control-user row">
+                                        {{ form.region }}
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user"
-                                               id="Request" name="Request" placeholder="Строка поиска" required>
+                                    <div class="form-control-user row">
+                                        {{ form.text_request }}
                                     </div>
                                     <button type="submit" placeholder="Передать запрос на вервер" class="btn btn-primary btn-user btn-block">
                                         Передать запрос на обработку
