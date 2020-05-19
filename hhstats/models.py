@@ -73,6 +73,8 @@ class Vacancies(TimeRegister):
     min_salary = models.FloatField(verbose_name="Минимальная зарплата")
     # максимальная зарплата
     max_salary = models.FloatField(verbose_name="Максимальная зарплата")
+    # валюта зарплаты
+    currency = models.CharField(max_length=5, verbose_name="Валюта зарплаты")
     # стаж в годах
     experience = models.IntegerField(verbose_name="Требуемый опыт")
     # ссылка на таблицу регионов
